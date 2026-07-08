@@ -1,0 +1,15 @@
+PREFIX cube: <https://cube.link/>
+
+CONSTRUCT {
+  <${cube}> cube:observationSet ?set .
+  ?set cube:observation ?obs .
+  ?obs ?p ?o .
+}
+WHERE {
+  { SELECT ?set ?obs WHERE {
+      <${cube}> cube:observationSet ?set .
+      ?set cube:observation ?obs .
+    } OFFSET 0 LIMIT 1000
+  }
+  ?obs ?p ?o .
+}

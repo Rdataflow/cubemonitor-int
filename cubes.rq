@@ -1,0 +1,12 @@
+PREFIX cube: <https://cube.link/>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?cube WHERE
+{
+  FILTER NOT EXISTS { ?cube schema:expires [] . }
+  ?cube a cube:Cube ; 
+          cube:observationSet ?oset ;
+          schema:creativeWorkStatus <https://ld.admin.ch/vocabulary/CreativeWorkStatus/Published> ; 
+          schema:workExample <https://ld.admin.ch/application/visualize> . 
+} 
+LIMIT 10000
