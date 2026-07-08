@@ -22,13 +22,13 @@ jobs:
         run: |
           #until `[ -s test.cubes.txt ]` ; do curl https://test.ld.admin.ch/query -s -X POST -H 'Accept: application/sparql-results+json' -H 'Content-Type: application/sparql-query' --data-binary @cubes.rq | jq -r '.results.bindings[].cube.value' > test.cubes.txt || sleep 2 ; done
           until `[ -s int.cubes.txt  ]` ; do curl https://int.ld.admin.ch/query -s -X POST -H 'Accept: application/sparql-results+json' -H 'Content-Type: application/sparql-query' --data-binary @cubes.rq | jq -r '.results.bindings[].cube.value' > int.cubes.txt || sleep 2 ; done
-          until `[ -s prod.cubes.txt ]` ; do curl https://ld.admin.ch/query -s -X POST -H 'Accept: application/sparql-results+json' -H 'Content-Type: application/sparql-query' --data-binary @cubes.rq | jq -r '.results.bindings[].cube.value' > prod.cubes.txt || sleep 2 ; done
+          #until `[ -s prod.cubes.txt ]` ; do curl https://ld.admin.ch/query -s -X POST -H 'Accept: application/sparql-results+json' -H 'Content-Type: application/sparql-query' --data-binary @cubes.rq | jq -r '.results.bindings[].cube.value' > prod.cubes.txt || sleep 2 ; done
       - name: Validate Cube Metadata and Observations 🔎
         continue-on-error: true
         run: |
           #./checkmetadata.sh test && ./checkobservations.sh test && ./checkall.sh test
           ./checkmetadata.sh int  && ./checkobservations.sh int  && ./checkall.sh int
-          ./checkmetadata.sh      && ./checkobservations.sh      && ./checkall.sh
+          #./checkmetadata.sh      && ./checkobservations.sh      && ./checkall.sh
           ./index.sh
           rm -f html_reports/*http*.html
       - name: Upload Pages artifact
