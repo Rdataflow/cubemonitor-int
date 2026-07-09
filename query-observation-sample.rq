@@ -8,7 +8,7 @@ CONSTRUCT {
 WHERE {
   <${cube}> cube:observationSet ?set .
   OPTIONAL {
-    { SELECT ?set WHERE {
+    { SELECT ?set ?obs WHERE {
         ?set cube:observation ?obs .
       } OFFSET 0 LIMIT 1000
     }
