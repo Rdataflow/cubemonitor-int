@@ -6,10 +6,12 @@ CONSTRUCT {
   ?obs ?p ?o .
 }
 WHERE {
-  { SELECT ?set ?obs WHERE {
-      <${cube}> cube:observationSet ?set .
-      ?set cube:observation ?obs .
-    } OFFSET 0 LIMIT 1000
+  <${cube}> cube:observationSet ?set .
+  OPTIONAL {
+    { SELECT ?set WHERE {
+        ?set cube:observation ?obs .
+      } OFFSET 0 LIMIT 1000
+    }
+    ?obs ?p ?o .
   }
-  ?obs ?p ?o .
 }
